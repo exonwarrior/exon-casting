@@ -79,9 +79,17 @@ function loadMedia() {
 		return;
 	}
 	
+	var mediaInfo = new chrome.cast.media.MediaInfo('http://commondatastorage.googleapis.com/gtv-videos-bucket/ED_1280.mp4');
+    mediaInfo.contentType = 'video/mp4';
+	
+	/*
+	The following two lines are an earlier example from the tutorial.
+	They have been replaced by the two lines above, from a later section
+	in the same tutorial.
+	
 	var mediaInfo = new chrome.cast.media.MediaInfo('http://i.imgur.com/IFD14.jpg');
 	mediaInfo.contentType = 'image/jpg';
-	
+	*/
 	var request = new chrome.cast.media.LoadRequest(mediaInfo);
 	request.autoplay = true;
 	
