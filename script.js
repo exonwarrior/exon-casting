@@ -16,6 +16,10 @@ $('#castme').click(function(){
 	launchApp();
 });
 
+$('#stop').click(function(){
+	stopApp();
+});
+
 function initializeCastApi() {
 	var applicationID = chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
 	var sessionRequest = new chrome.cast.SessionRequest(applicationID);
@@ -84,4 +88,16 @@ function onLoadSuccess() {
 
 function onLoadError() {
 	console.log('Failed to load image.');
+}
+
+function stopApp() {
+	session.stop(onStopAppSuccess, onStopAppError);
+}
+
+function onStopAppSuccess() {
+	console.log('Successfully stopped app.');
+}
+
+function onStopAppError() {
+	console.log('Error stopping app.');
 }
