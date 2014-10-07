@@ -56,8 +56,32 @@ function launchApp() {
 function onRequestSessionSuccess(e) {
 	console.log("Successfully created session: " + e.sessionId);
 	session = e;
+	loadMedia();
 }
 
 function onLaunchError() {
 	console.log("Error connecting to the Chromecast.");
+}
+
+function loadMedia() {
+	if (!session) {
+		console.log("No session.");
+		return;
+	}
+	
+	var mediaInfo = new chrome.cast.media.MediaInfo('http://i.imgur.com/IFD14.jpg');
+	mediaInfo.contentType = 'image/jpg';
+	
+	var request = new chrome.cast.media.LoadRequest(mediaInfo);
+	request.autoplay = true;
+	
+	session.loadMedia(request, onLoadSuccess, onLoadError);
+}
+
+function onLoadSuccess() {
+	console.log('Successfully loaded image.');
+}
+
+function onLoadError() {
+	console.log('Failed to load image.');
 }
