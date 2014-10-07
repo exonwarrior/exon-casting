@@ -20,7 +20,7 @@ $('#stop').click(function(){
 	stopApp();
 });
 
-$('$change').click(function(){
+$('#change').click(function(){
 	loadMedia();
 });
 
