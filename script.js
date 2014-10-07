@@ -12,6 +12,10 @@ $( document ).ready(function(){
 	}, 1000);
 });
 
+$('#castme').click(function(){
+	launchApp();
+});
+
 function initializeCastApi() {
 	var applicationID = chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
 	var sessionRequest = new chrome.cast.SessionRequest(applicationID);
@@ -42,4 +46,18 @@ function onInitSuccess() {
 
 function onInitError() {
 	console.log("Initialization failed");
+}
+
+function launchApp() {
+	console.log("Launching the Chromecast App...");
+	chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError);
+}
+
+function onRequestSessionSuccess(e) {
+	console.log("Successfully created session: " + e.sessionId);
+	session = e;
+}
+
+function onLaunchError() {
+	console.log("Error connecting to the Chromecast.");
 }
