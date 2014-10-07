@@ -7,5 +7,5 @@ $( document ).ready(function(){
 		} else {
 			console.log('Unavailable.');
 		}
-	}, 1000};
+	}, 1000);
 });
