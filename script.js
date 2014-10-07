@@ -36,7 +36,7 @@ function receiverListener(e){
 	}
 }
 
-function onInitSucess() {
+function onInitSuccess() {
 	console.log("Initialization suceeded");
 }
 
