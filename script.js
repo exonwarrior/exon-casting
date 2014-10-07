@@ -32,7 +32,7 @@ function initializeCastApi() {
 	chrome.cast.initialize(apiConfig, onInitSuccess, onInitError);
 };
 
-function sessionListener(e){
+function sessionListener(e) {
 	session = e;
 	console.log('New session');
 	if (session.media.length != 0) {
@@ -81,9 +81,9 @@ function loadMedia() {
 		console.log("No session.");
 		return;
 	}
-	
+
 	var mediaInfo = new chrome.cast.media.MediaInfo('http://commondatastorage.googleapis.com/gtv-videos-bucket/ED_1280.mp4');
-    mediaInfo.contentType = 'video/mp4';
+	mediaInfo.contentType = 'video/mp4';
 	
 	/*
 	The following two lines are an earlier example from the tutorial.
@@ -93,9 +93,10 @@ function loadMedia() {
 	var mediaInfo = new chrome.cast.media.MediaInfo('http://i.imgur.com/IFD14.jpg');
 	mediaInfo.contentType = 'image/jpg';
 	*/
+
 	var request = new chrome.cast.media.LoadRequest(mediaInfo);
 	request.autoplay = true;
-	
+
 	session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onLoadError);
 }
 
@@ -130,9 +131,9 @@ function sessionUpdateListener(isAlive) {
 }
 
 function onMediaDiscovered(how, media) {
-        console.log("New media session ID:" + media.mediaSessionId + ' (' + how + ')');
-        currentMediaSession = mediaSession;
-        document.getElementById("playpause").innerHTML = 'Pause';
+	console.log("New media session ID:" + media.mediaSessionId + ' (' + how + ')');
+	currentMediaSession = media;
+	document.getElementById("playpause").innerHTML = 'Pause';
 }
 
 function playMedia() {
