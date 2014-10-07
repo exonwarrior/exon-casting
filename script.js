@@ -60,6 +60,7 @@ function launchApp() {
 function onRequestSessionSuccess(e) {
 	console.log("Successfully created session: " + e.sessionId);
 	session = e;
+	session.addUpdateListener(sessionUpdateListener.bind(this));
 	loadMedia();
 }
 
@@ -100,4 +101,14 @@ function onStopAppSuccess() {
 
 function onStopAppError() {
 	console.log('Error stopping app.');
+}
+
+function sessionUpdateListener(isAlive) {
+	var message = isAlive ? 'Session Updated' : 'Session Removed';
+	message += ': ' + session.sessionId;
+	console.log(message);
+	
+	if(!isAlive) {
+		session = null;
+	}
 }
