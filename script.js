@@ -20,6 +20,10 @@ $('#stop').click(function(){
 	stopApp();
 });
 
+$('$change').click(function(){
+	loadMedia();
+});
+
 function initializeCastApi() {
 	var applicationID = chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
 	var sessionRequest = new chrome.cast.SessionRequest(applicationID);
@@ -61,6 +65,7 @@ function onRequestSessionSuccess(e) {
 	console.log("Successfully created session: " + e.sessionId);
 	session = e;
 	session.addUpdateListener(sessionUpdateListener.bind(this));
+	session.addMediaListener(onMediaDiscovered.bind(this, 'addMediaListener'));
 	loadMedia();
 }
 
@@ -111,4 +116,8 @@ function sessionUpdateListener(isAlive) {
 	if(!isAlive) {
 		session = null;
 	}
+}
+
+function onMediaDiscovered(how, media) {
+	console.log("New media session ID:" + media.mediaSessionId + ' (' + how + ')');
 }
